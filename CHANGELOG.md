@@ -2,6 +2,17 @@
 
 All notable changes to the WordPress Docker Template (WPDT) will be documented in this file.
 
+## [1.0.1] - 2024-08-27
+
+### Changed
+- Updated `docker-compose.yml` to add `MYSQL_SSL_CA` environment variable for MySQL service
+- Improved `wp-config-ssl.php` to support SSL CA path from environment and enhanced error handling
+
+### Fixed
+- Fix Azure MySQL connection - Remove local MySQL dependency and add SSL support
+- Clarified documentation and improved inline comments in configuration files
+
+
 ## [1.0.0] - 2025-08-27
 
 ### Added
