@@ -63,3 +63,16 @@ wp-content/uploads/*
 !README.md
 !QUICK-START.md
 !.env.example
+
+# SSL Certificates and Keys (NEVER commit these!)
+*.crt
+*.cer
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+ssl/
+certs/
+certificates/
+digicert/
