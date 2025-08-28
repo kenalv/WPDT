@@ -1,0 +1,4 @@
+# Keep this directory in Git but ignore uploaded files
+# This ensures the uploads directory exists for Docker volume mounting
+*
+!.gitkeep

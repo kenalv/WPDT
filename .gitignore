@@ -1,0 +1,65 @@
+# WordPress Docker Template (WPDT) - Git Repository
+
+# Environment files (contain sensitive data)
+.env
+.env.local
+.env.production
+
+# WordPress content that should be project-specific
+wp-content/uploads/*
+wp-content/cache/*
+wp-content/backup*
+wp-content/debug.log
+
+# Docker volumes and data
+mysql_data/
+docker-data/
+
+# WordPress auto-generated files
+wp-content/upgrade/
+wp-content/w3tc-config/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE files
+.vscode/settings.json
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+logs/
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Temporary folders
+tmp/
+temp/
+
+# Optional: Keep wp-content structure but ignore content
+!wp-content/
+!wp-content/mu-plugins/
+!wp-content/themes/
+!wp-content/plugins/
+!wp-content/uploads/
+wp-content/uploads/*
+!wp-content/uploads/.gitkeep
+
+# Keep these important files
+!.gitignore
+!README.md
+!QUICK-START.md
+!.env.example
