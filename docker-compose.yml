@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   # WordPress service
   wordpress:
@@ -15,16 +13,8 @@ services:
       WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
       WORDPRESS_DB_NAME: ${DB_NAME}
       
-      # WordPress Configuration
-      WORDPRESS_CONFIG_EXTRA: |
-        /* SSL Configuration for Azure MySQL */
-        define('MYSQL_SSL_CA', '/var/www/html/DigiCertGlobalRootCA.crt.pem');
-        
-        /* Debug Configuration */
-        define('WP_DEBUG', true);
-        define('WP_DEBUG_LOG', true);
-        define('WP_DEBUG_DISPLAY', false);
-        define('SAVEQUERIES', true);
+      # WordPress Configuration  
+      WORDPRESS_CONFIG_EXTRA: define('MYSQL_SSL_CA', '/var/www/html/DigiCertGlobalRootCA.crt.pem'); define('MYSQL_CLIENT_FLAGS', MYSQLI_CLIENT_SSL); define('WP_DEBUG_LOG', true); define('WP_DEBUG_DISPLAY', false);
         
         /* Performance Configuration */
         define('WP_POST_REVISIONS', 3);
@@ -45,47 +35,47 @@ services:
       - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
       - ./DigiCertGlobalRootCA.crt.pem:/var/www/html/DigiCertGlobalRootCA.crt.pem:ro
       - ./performance-monitor.php:/var/www/html/wp-content/mu-plugins/performance-monitor.php:ro
-    depends_on:
-      - mysql
+    #depends_on: # Local MySQL service (for development - optional)
+    #  - mysql
     networks:
       - wpdt-network
 
   # Local MySQL service (for development - optional)
-  mysql:
-    image: mysql:8.0
-    container_name: wpdt-mysql-local
-    restart: unless-stopped
-    environment:
-      MYSQL_DATABASE: wpdt_local_db
-      MYSQL_USER: wpdt
-      MYSQL_PASSWORD: wpdt123
-      MYSQL_ROOT_PASSWORD: root123
-    volumes:
-      - mysql_data:/var/lib/mysql
-    ports:
-      - "3307:3306"  # Different port to avoid conflict
-    networks:
-      - wpdt-network
-    profiles:
-      - local  # Only start with: docker-compose --profile local up
+  #mysql:
+  #  image: mysql:8.0
+  #  container_name: wpdt-mysql-local
+  #  restart: unless-stopped
+  #  environment:
+  #    MYSQL_DATABASE: wpdt_local_db
+  #    MYSQL_USER: wpdt
+  #    MYSQL_PASSWORD: wpdt123
+  #    MYSQL_ROOT_PASSWORD: root123
+  #  volumes:
+  #    - mysql_data:/var/lib/mysql
+  #  ports:
+  #    - "3307:3306"  # Different port to avoid conflict
+  #  networks:
+  #    - wpdt-network
+  #  profiles:
+  #    - local  # Only start with: docker-compose --profile local up
 
   # phpMyAdmin for local database management
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    container_name: wpdt-phpmyadmin
-    restart: unless-stopped
-    ports:
-      - "8091:80"
-    environment:
-      PMA_HOST: mysql
-      PMA_USER: wpdt
-      PMA_PASSWORD: wpdt123
-    depends_on:
-      - mysql
-    networks:
-      - wpdt-network
-    profiles:
-      - local
+  #phpmyadmin:
+  #  image: phpmyadmin/phpmyadmin
+  #  container_name: wpdt-phpmyadmin
+  #  restart: unless-stopped
+  #  ports:
+  #    - "8091:80"
+  #  environment:
+  #    PMA_HOST: mysql
+  #    PMA_USER: wpdt
+  #    PMA_PASSWORD: wpdt123
+  #  depends_on:
+  #    - mysql
+  #  networks:
+  #    - wpdt-network
+  #  profiles:
+  #    - local
 
 volumes:
   mysql_data:
