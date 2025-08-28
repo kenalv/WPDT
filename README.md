@@ -14,7 +14,7 @@ A production-ready WordPress Docker template with Azure MySQL integration, perfo
 - ✅ **Local development** option with phpMyAdmin
 - ✅ **Performance monitoring** and optimization
 - ✅ **Security hardening** and best practices
-- ✅ **File upload optimization** (64MB limit)
+- ✅ **File upload optimization** (128MB limit)
 - ✅ **Debug logging** and slow query detection
 - ✅ **Easy setup scripts** for Windows and Linux
 
